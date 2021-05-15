@@ -20,9 +20,15 @@ class GameScene: SKScene {
   
     override func didMove(to view: SKView) {
      
+        let background = SKSpriteNode(imageNamed: "background.jpg")
+        background.position = CGPoint(x: 512, y: 384)
+        background.blendMode = .replace
+        background.zPosition = -1
+        addChild((background))
+        
         }
         
-    func loadView() {
+    func loadLevel() {
         
         //level1.txt読み込み
         guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else { fatalError("Could not find level1.txt in the app bundle")
