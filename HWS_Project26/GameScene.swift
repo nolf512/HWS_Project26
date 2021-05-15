@@ -17,6 +17,15 @@ enum CollisionTypes: UInt32 {
 }
 
 class GameScene: SKScene {
+    
+    var scoreLabel: SKLabelNode!
+    
+    var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
+    
     var player: SKSpriteNode!
     
     var lastTouchPosition: CGPoint?
@@ -31,6 +40,15 @@ class GameScene: SKScene {
         background.blendMode = .replace
         background.zPosition = -1
         addChild((background))
+        
+        scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        scoreLabel.text = "Score: 0"
+        scoreLabel.horizontalAlignmentMode = .left
+        scoreLabel.position = CGPoint(x: 16, y: 16)
+        scoreLabel.zPosition = 2
+        addChild(scoreLabel)
+        
+        
         
         //デフォルトの重力をゼロにする
         physicsWorld.gravity = .zero
