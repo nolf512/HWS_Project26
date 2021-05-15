@@ -52,21 +52,45 @@ class GameScene: SKScene {
                     let node = SKSpriteNode(imageNamed: "vortex")
                     node.name = "vortex"
                     node.position = position
-                    
+                    //ゲームが続く限り各渦を回転させる
                     node.run(SKAction.rotate(byAngle: .pi, duration: 1))
+                    
                     node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
                     node.physicsBody?.isDynamic = false
                     
+                    //自分が属するカテゴリ値
                     node.physicsBody?.categoryBitMask = CollisionTypes.vortex.rawValue
+                    //物体と衝突した時に、通知として送る値
                     node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+                    //この値とぶつかってくる相手のcategoryBitMaskの値とをAND算出結果が1で衝突する
                     node.physicsBody?.collisionBitMask = 0
                     
                     addChild(node)
                     
                 } else if letter == "s" {
                     //star
+                    let node = SKSpriteNode(imageNamed: "star")
+                    node.name = "star"
+                    node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+                    node.physicsBody?.isDynamic = false
+                    
+                    node.physicsBody?.categoryBitMask = CollisionTypes.star.rawValue
+                    node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+                    node.physicsBody?.collisionBitMask = 0
+                    node.position = position
+                    addChild(node)
                 } else if letter == "f" {
                     //finish point
+                    let node = SKSpriteNode(imageNamed: "finish")
+                    node.name = "finish"
+                    node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+                    node.physicsBody?.isDynamic = false
+                    
+                    node.physicsBody?.categoryBitMask = CollisionTypes.finish.rawValue
+                    node.physicsBody?.contactTestBitMask = CollisionTypes.player.rawValue
+                    node.physicsBody?.collisionBitMask = 0
+                    node.position = position
+                    addChild(node)
                 } else {
                     fatalError("Unknown level letter: \(letter)")
                 }
@@ -74,3 +98,4 @@ class GameScene: SKScene {
         }
     }
 }
+
